@@ -7,7 +7,8 @@ const { Media } = require("./Media");
 
 const hooks = {
   beforeCreate(user) {
-    user.password = bcryptSevice().password(user); // eslint-disable-line no-param-reassign
+    user.password = bcryptSevice().password(user);
+    user.avatar = 1; // eslint-disable-line no-param-reassign
   },
   beforeUpdate(user) {
     user.password = bcryptSevice().password(user);
