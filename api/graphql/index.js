@@ -26,6 +26,7 @@ const { chatSubscription } = require("./subscriptions");
 const { commentSubscription } = require("./subscriptions");
 const { liveChatSubscription } = require("./subscriptions");
 const { swipeSubscription } = require("./subscriptions");
+const { reactionSubscription } = require("./subscriptions");
 
 const RootQuery = new GraphQLObjectType({
   name: "rootQuery",
@@ -74,6 +75,7 @@ const RootSubscription = new GraphQLObjectType({
     commentSubscription,
     liveChatSubscription,
     swipeSubscription,
+    reactionSubscription,
   }),
 });
 

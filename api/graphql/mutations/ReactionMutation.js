@@ -25,7 +25,10 @@ const sendReaction = {
       senderId: userId,
     });
     pubsub.publish("NEW_REACTION_" + id().encode(group.id), {
-      ...createdReaction,
+      id: await Reaction.count(),
+      createdAt: new Date(),
+      senderId: userId,
+      feelingId: reaction.feelingId,
     });
 
     return createdReaction;

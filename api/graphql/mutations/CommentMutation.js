@@ -21,7 +21,10 @@ const sendComment = {
       senderId: userId,
     });
     pubsub.publish("NEW_COMMENT_" + id().encode(group.id), {
-      ...createdComment,
+      id: await Comment.count(),
+      ...comment,
+      senderId: userId,
+      createdAt: new Date(),
     });
 
     return createdComment;

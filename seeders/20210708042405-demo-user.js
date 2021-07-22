@@ -204,6 +204,32 @@ module.exports = {
         updatedAt: new Date(),
       },
     ]);
+    await queryInterface.bulkInsert("diary", [
+      {
+        groupId: 1,
+        userId: 2,
+        image: 2,
+        description: "Sample description",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        groupId: 1,
+        userId: 2,
+        image: 2,
+        description: "Sample description",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        groupId: 1,
+        userId: 2,
+        image: 2,
+        description: "Sample description",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
