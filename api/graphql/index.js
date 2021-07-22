@@ -18,12 +18,14 @@ const { sendFeeling } = require("./mutations");
 const { createDiary } = require("./mutations");
 const { sendReaction } = require("./mutations");
 const { sendLiveChat } = require("./mutations");
+const { swipe } = require("./mutations");
 
 const { feelingSubscription } = require("./subscriptions");
 const { diarySubscription } = require("./subscriptions");
 const { chatSubscription } = require("./subscriptions");
 const { commentSubscription } = require("./subscriptions");
 const { liveChatSubscription } = require("./subscriptions");
+const { swipeSubscription } = require("./subscriptions");
 
 const RootQuery = new GraphQLObjectType({
   name: "rootQuery",
@@ -57,6 +59,7 @@ const RootMutation = new GraphQLObjectType({
     createDiary,
     sendReaction,
     sendLiveChat,
+    swipe,
   }),
 });
 
@@ -70,6 +73,7 @@ const RootSubscription = new GraphQLObjectType({
     feelingSubscription,
     commentSubscription,
     liveChatSubscription,
+    swipeSubscription,
   }),
 });
 

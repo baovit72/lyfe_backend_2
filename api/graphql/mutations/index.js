@@ -12,6 +12,7 @@ const { createDiary } = require("./DiaryMutation");
 const { sendComment } = require("./CommentMutation");
 const { sendReaction } = require("./ReactionMutation");
 const { sendLiveChat } = require("./LiveChatMutation");
+const { swipe } = require("./SwipeMutation");
 
 module.exports = {
   createNote,
@@ -30,4 +31,5 @@ module.exports = {
   sendReaction,
   sendComment,
   sendLiveChat,
+  swipe,
 };

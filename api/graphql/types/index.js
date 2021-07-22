@@ -6,6 +6,7 @@ const { ChatType } = require("./ChatType");
 const { DiaryType } = require("./DiaryType");
 const { CommentType } = require("./CommentType");
 const { LiveChatType } = require("./LiveChatType");
+const { SwipeType } = require("./SwipeType");
 const { ReactionType } = require("./ReactionType");
 const { FeelingType } = require("./FeelingType");
 
@@ -20,4 +21,5 @@ module.exports = {
   DiaryType,
   ReactionType,
   LiveChatType,
+  SwipeType,
 };
