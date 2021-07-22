@@ -4,6 +4,7 @@ const { GroupDetailInputType } = require("./GroupDetailInputType");
 const { DiaryInputType } = require("./DiaryInputType");
 const { ChatInputType } = require("./ChatInputType");
 const { CommentInputType } = require("./CommentInputType");
+const { LiveChatInputType } = require("./LiveChatInputType");
 const { ReactionInputType } = require("./ReactionInputType");
 
 module.exports = {
@@ -14,4 +15,5 @@ module.exports = {
   ChatInputType,
   CommentInputType,
   ReactionInputType,
+  LiveChatInputType,
 };
