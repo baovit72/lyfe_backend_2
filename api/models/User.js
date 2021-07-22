@@ -7,6 +7,7 @@ const { Media } = require("./Media");
 
 const hooks = {
   beforeCreate(user) {
+    user.birthday = new Date();
     user.password = bcryptSevice().password(user);
     user.avatar = 1; // eslint-disable-line no-param-reassign
   },

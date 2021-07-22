@@ -4,18 +4,24 @@ const { userQuery } = require("./queries");
 const { groupQuery } = require("./queries");
 const { feelingQuery } = require("./queries");
 const { chatQuery } = require("./queries");
+const { diaryQuery } = require("./queries");
+const { reactionQuery } = require("./queries");
+
+const { commentQuery } = require("./queries");
+
 const { updateUser, deleteUser } = require("./mutations");
-const { noteQuery } = require("./queries");
-const { createNote, updateNote, deleteNote } = require("./mutations");
 const { createGroup, updateGroup } = require("./mutations");
 const { joinGroup, leaveGroup } = require("./mutations");
 const { sendChat } = require("./mutations");
+const { sendComment } = require("./mutations");
 const { sendFeeling } = require("./mutations");
 const { createDiary } = require("./mutations");
+const { sendReaction } = require("./mutations");
 
 const { feelingSubscription } = require("./subscriptions");
 const { diarySubscription } = require("./subscriptions");
 const { chatSubscription } = require("./subscriptions");
+const { commentSubscription } = require("./subscriptions");
 
 const RootQuery = new GraphQLObjectType({
   name: "rootQuery",
@@ -23,10 +29,12 @@ const RootQuery = new GraphQLObjectType({
     "This is the root query which holds all possible READ entrypoints for the GraphQL API",
   fields: () => ({
     user: userQuery,
-    note: noteQuery,
     group: groupQuery,
     chat: chatQuery,
     feeling: feelingQuery,
+    comment: commentQuery,
+    reaction: reactionQuery,
+    diary: diaryQuery,
   }),
 });
 
@@ -37,9 +45,7 @@ const RootMutation = new GraphQLObjectType({
   fields: () => ({
     updateUser,
     deleteUser,
-    createNote,
-    updateNote,
-    deleteNote,
+    sendComment,
     createGroup,
     updateGroup,
     joinGroup,
@@ -47,6 +53,7 @@ const RootMutation = new GraphQLObjectType({
     sendFeeling,
     sendChat,
     createDiary,
+    sendReaction,
   }),
 });
 
@@ -58,6 +65,7 @@ const RootSubscription = new GraphQLObjectType({
     chatSubscription,
     diarySubscription,
     feelingSubscription,
+    commentSubscription,
   }),
 });
 

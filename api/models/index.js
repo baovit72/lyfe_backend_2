@@ -8,6 +8,8 @@ const { ResetToken } = require("./ResetToken");
 const { Media } = require("./Media");
 const { Chat } = require("./Chat");
 const { DiaryItem } = require("./DiaryItem");
+const { Comment } = require("./Comment");
+const { Reaction } = require("./Reaction");
 module.exports = {
   Media,
   User,
@@ -18,4 +20,6 @@ module.exports = {
   ResetToken,
   DiaryItem,
   Feeling,
+  Comment,
+  Reaction,
 };

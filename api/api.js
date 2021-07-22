@@ -1,4 +1,16 @@
 /**
+
+const media = require("./services/media.service");
+
+
+const id = require("./services/id.service");
+
+
+const group = require("./services/group.service");
+
+
+const User = require("./models/User");
+
  * third party libraries
  */
 const JWTService = require("./services/auth.service");
@@ -13,9 +25,7 @@ const mapRoutes = require("express-routes-mapper");
 const { PubSub } = require("apollo-server-express");
 const { uploadImageMW, uploadVideoMW, embedVideo, embedImage } =
   require("./controllers/MediaController")();
-const { PeerServer } = require("peer");
-
-const peerServer = PeerServer({ port: 20212, path: "/room" });
+const { ExpressPeerServer } = require("peer");
 
 /**
  * server configuration
@@ -33,6 +43,14 @@ const environment = process.env.NODE_ENV;
  */
 const api = express();
 const server = http.Server(api);
+// const io = require("socket.io")(server);
+// const customGenerationFunction = () =>
+//   (Math.random().toString(36) + "0000000000000000000").substr(2, 16);
+// const peerExpress = ExpressPeerServer(server, {
+//   debug: true,
+//   path: "/",
+//   generateClientId: customGenerationFunction,
+// });
 const privateMappedRoutes = mapRoutes(config.privateRoutes, "api/controllers/");
 const publicMappedRoutes = mapRoutes(config.publicRoutes, "api/controllers/");
 const DB = dbService(environment, config.migrate).start();
@@ -41,6 +59,7 @@ const DB = dbService(environment, config.migrate).start();
 // configure to allow only requests from certain origins
 api.use(cors());
 
+// api.use("/mypeer", peerExpress);
 // secure express app
 api.use(
   helmet({

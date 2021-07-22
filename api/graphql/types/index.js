@@ -4,6 +4,8 @@ const { GroupDetailType } = require("./GroupDetailType");
 const { GroupType } = require("./GroupType");
 const { ChatType } = require("./ChatType");
 const { DiaryType } = require("./DiaryType");
+const { CommentType } = require("./CommentType");
+const { ReactionType } = require("./ReactionType");
 const { FeelingType } = require("./FeelingType");
 
 module.exports = {
@@ -13,4 +15,7 @@ module.exports = {
   GroupDetailType,
   ChatType,
   FeelingType,
+  CommentType,
+  DiaryType,
+  ReactionType,
 };

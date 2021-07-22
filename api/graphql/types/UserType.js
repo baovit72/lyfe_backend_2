@@ -5,6 +5,7 @@ const {
   GraphQLList,
 } = require("graphql");
 
+const media = require("../../services/media.service");
 const { NoteType } = require("./NoteType");
 
 const UserType = new GraphQLObjectType({
@@ -33,12 +34,15 @@ const UserType = new GraphQLObjectType({
     },
     avatar: {
       type: GraphQLString,
-      resolve: (user) => {},
+      resolve: async (user) => {
+        console.log("user", user.dataValues.avatar);
+        return await media().getMediaUrlById(user.dataValues.avatar);
+      },
     },
     birthday: {
       type: GraphQLString,
       resolve: (user) => {
-        user.birthday;
+        return user.birthday;
       },
     },
     // notes: {

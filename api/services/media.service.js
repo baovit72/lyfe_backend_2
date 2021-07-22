@@ -11,7 +11,7 @@ const mediaService = () => {
       case "image":
         return getImageUrl(media.filename);
       case "video":
-        return getVideoUrl(media.filename);
+        return getVideoUrl(media.filename) + ".mp4";
       default:
         return "";
     }

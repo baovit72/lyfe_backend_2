@@ -9,6 +9,8 @@ const { createUser, updateUser, deleteUser } = require("./UserMutation");
 
 const { sendChat } = require("./ChatMutation");
 const { createDiary } = require("./DiaryMutation");
+const { sendComment } = require("./CommentMutation");
+const { sendReaction } = require("./ReactionMutation");
 
 module.exports = {
   createNote,
@@ -24,4 +26,6 @@ module.exports = {
   leaveGroup,
   createDiary,
   sendFeeling,
+  sendReaction,
+  sendComment,
 };

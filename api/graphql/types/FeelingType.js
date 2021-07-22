@@ -25,6 +25,10 @@ const FeelingType = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: (feeling) => feeling.id,
     },
+    createdAt: {
+      type: GraphQLString,
+      resolve: (feeling) => feeling.createdAt,
+    },
   }),
 });
 

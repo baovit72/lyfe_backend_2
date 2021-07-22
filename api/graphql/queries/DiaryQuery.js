@@ -30,7 +30,7 @@ const diaryQuery = {
           id: userId,
           avatar: await media().getMediaUrlById(sender.avatar),
         }),
-        createdAt: currentDiary.createdAt.toISOString(),
+        createdAt: new Date(currentDiary.createdAt),
         description: currentDiary.description,
         id: currentDiary.id,
       };

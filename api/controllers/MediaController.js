@@ -98,6 +98,7 @@ const MediaController = () => {
       console.log("created video", media);
       res.send(
         JSON.stringify({
+          id: idService().encode(media.id),
           url: mediaService().getVideoUrl(req.file.filename),
         })
       );
@@ -130,7 +131,7 @@ const MediaController = () => {
     }
   };
   const getVideo = async (req, res) => {
-    const videoName = req.url.replace("/video", "");
+    const videoName = req.url.replace("/video", "").replace(".mp4", "");
     const range = req.headers.range;
     console.log("dir", __dirname);
     const videoPath = path.resolve(__dirname, "../../medias/" + videoName);

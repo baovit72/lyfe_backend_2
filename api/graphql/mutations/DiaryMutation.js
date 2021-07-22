@@ -31,7 +31,9 @@ const createDiary = {
       image: +id().decode(diary.image),
     });
     pubsub.publish("NEW_DIARY_" + id().encode(group.id), {
+      id: await DiaryItem.count(),
       description: createdItem.description,
+      createdAt: new Date(),
       image: await media().getMediaUrlById(createdItem.image),
       user: JSON.stringify({
         name: user.name,

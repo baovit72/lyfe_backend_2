@@ -1,5 +1,7 @@
 const { User, Media } = require("../models");
 
+const { ActivationCode } = require("../models/ActivationCode");
+
 const authService = require("../services/auth.service");
 const bcryptService = require("../services/bcrypt.service");
 const mediaService = require("../services/media.service");
@@ -18,25 +20,54 @@ const { ResetToken } = require("../models/ResetToken");
 
 const AuthController = () => {
   const verifyEmail = async (req, res) => {
+    console.log("Verifying email");
     const { email } = req.body;
+    console.log(req.body);
     if (!email)
       return res.status(401).json({ error: 1, message: "Email not found" });
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (user)
+      return res.status(401).json({ error: 1, message: "Email exists!" });
     const token = twofactor.generateToken("email" + "*lyfe");
-    twoFactor.window = 2;
-    console.log("generatedToken", token);
+    const createdToken = await ActivationCode.create({
+      code: token.token,
+      email: email,
+      exp: new Date(new Date().getTime() + 30 * 60 * 1000),
+    });
     const html = fs
       .readFileSync(
-        path.resolve(__dirname, "../html-template/resetlink.html"),
+        path.resolve(__dirname, "../html-template/activation.html"),
         "utf8"
       )
-      .replace("<activation_code>", token);
-    await mailService().send(email, html, "[LYFE] RESTORE YOUR PASSWORD");
+      .replace("activation_code", token.token);
+    await mailService().send(email, html, "[LYFE] GET YOUR ACTIVATION CODE");
     return res.status(200).json({ error: 0, message: "Created token" });
   };
   const register = async (req, res) => {
-    const { email, password, name, username, phone } = req.body;
+    const { email, password, name, username, phone, code } = req.body;
 
     try {
+      if (!code || code === undefined) {
+        return res.status(400).json({ error: 1, message: "Code not found" });
+      }
+      const entries = await ActivationCode.findAll({
+        limit: 1,
+        where: {
+          code,
+          email,
+        },
+        order: [["createdAt", "DESC"]],
+      });
+      if (!entries || !entries.length)
+        return res.status(400).json({ error: 1, message: "Code not found" });
+
+      const resettoken = entries[0];
+      if (resettoken.exp < new Date())
+        return res.status(400).send({ error: 1, message: "Code expired" });
       const user = await User.create({
         email,
         password,
@@ -45,7 +76,6 @@ const AuthController = () => {
         phone,
       });
       const token = authService().issue({ id: user.id });
-
       return res.status(200).json({ token, user });
     } catch (err) {
       console.log(err);
@@ -58,7 +88,8 @@ const AuthController = () => {
         });
       else {
         return res.status(500).json({
-          msg: "Internal Server Error",
+          error: 1,
+          message: "Internal Server Error",
         });
       }
     }

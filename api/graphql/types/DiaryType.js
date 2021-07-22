@@ -23,8 +23,9 @@ const DiaryType = new GraphQLObjectType({
     },
     createdAt: {
       type: GraphQLString,
-      resolve: (diary) => diary.createdAt,
+      resolve: (diary) => diary.createdAt.toISOString(),
     },
+    id: { type: GraphQLInt, resolve: (diary) => diary.id },
   }),
 });
 
